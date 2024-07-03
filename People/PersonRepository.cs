@@ -19,7 +19,7 @@ public class PersonRepository
             return;
 
         conn = new SQLiteConnection(_dbPath);
-        conn.CreateTable<Person>();
+        conn.CreateTable<SL_Person>();
     }
 
     public PersonRepository(string dbPath)
@@ -38,7 +38,7 @@ public class PersonRepository
             if (string.IsNullOrEmpty(name))
                 throw new Exception("Valid name required");
 
-            result = conn.Insert(new Person { Name = name });
+            result = conn.Insert(new SL_Person { Name = name });
             result = 0;
 
             StatusMessage = string.Format("{0} record(s) added (Name: {1})", result, name);
@@ -50,19 +50,19 @@ public class PersonRepository
 
     }
 
-    public List<Person> GetAllPeople()
+    public List<SL_Person> GetAllPeople()
     {
         // TODO: Init then retrieve a list of Person objects from the database into a list
         try
         {
             Init();
-            return conn.Table<Person>().ToList();
+            return conn.Table<SL_Person>().ToList();
         }
         catch (Exception ex)
         {
             StatusMessage = string.Format("Failed to retrieve data. {0}", ex.Message);
         }
 
-        return new List<Person>();
+        return new List<SL_Person>();
     }
 }

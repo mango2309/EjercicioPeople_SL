@@ -8,7 +8,7 @@ using SQLite;
 namespace People.Models
 {
     [Table("people")]
-    public class Person
+    public class SL_Person
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
