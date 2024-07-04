@@ -27,5 +27,24 @@ public partial class MainPage : ContentPage
         List<SL_Person> people = await App.PersonRepo.GetAllPeopleAsync();
         peopleList.ItemsSource = people;
     }
+
+    private async void OnDeleteButtonClicked(object sender, EventArgs args)
+    {
+        statusMessage.Text = "";
+
+        if (sender is Button button && button.CommandParameter is int personId)
+        {
+            await App.PersonRepo.DeletePersonAsync(personId);
+            statusMessage.Text = App.PersonRepo.StatusMessage;
+
+            // Refresh the list
+            List<SL_Person> people = await App.PersonRepo.GetAllPeopleAsync();
+            peopleList.ItemsSource = people;
+        }
+        else
+        {
+            statusMessage.Text = "No se elimina la persona.";
+        }
+    }
 }
 
